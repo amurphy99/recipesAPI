@@ -50,16 +50,18 @@ final class DessertTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
         
-        // check that they each have an id and name
+        // check that they each have an id and name, should check that the image urls are valid
         let dataExpection = XCTestExpectation(description: "Check that each dessert has at least a non-nil name and id.")
         for dessert in dessertResults {
             XCTAssertNotNil(dessert.strMeal, "Expected to have a non-nil name.")
             XCTAssertNotNil(dessert.idMeal,  "Expected to have a non-nil id.")
+            // check that the image URL is valid
+            if !(UIApplication.shared.canOpenURL(dessert.strMealThumb as URL)) { XCTFail("URL not valid") }
+            
         }
         dataExpection.fulfill()
         
         wait(for: [dataExpection], timeout: 10.0)
-        
     }
     
     
