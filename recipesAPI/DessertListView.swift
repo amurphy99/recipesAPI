@@ -14,9 +14,6 @@ struct DessertListView: View {
     // For View formatting
     private let items: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     
-    // For Previews
-    private let preview_mode: Bool = false // change to false when previewing using the actual api
-    private let sample_size: Int = 9
     
     var body: some View {
         NavigationView {
@@ -46,13 +43,7 @@ struct DessertListView: View {
         } // end NavigationView
         .onAppear{
             // Retrieve API data
-            // don't spam API calls and take forever to load while working
-            if preview_mode {
-                self.desserts = Array(NetworkManager().fetchDesserts_previews()[0...(sample_size-1)]).sorted(by: { $0.strMeal < $1.strMeal })
-            }
-            else {
-                NetworkManager().fetchDesserts { (desserts) in self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal }) }
-            }
+            NetworkManager().fetchDesserts { (desserts) in self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal }) }
             
             // navbar
             let appearance = UINavigationBarAppearance()

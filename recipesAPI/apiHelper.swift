@@ -167,18 +167,6 @@ struct APImealDetails: Codable, Hashable {
 
 
 
-
-
-
-
-
-
-
-
-
-// example details call
-// https://themealdb.com/api/json/v1/1/lookup.php?i=53049
-
 class NetworkManager {
 
     // dessert list
@@ -229,29 +217,7 @@ class NetworkManager {
         })
         task.resume()
     }
-    
-    
-    
-    
-    
-    
-    // function for preview data; don't want to spam api calls while working on project
-    // https://stackoverflow.com/questions/24410881/reading-in-a-json-file-using-swift
-    func fetchDesserts_previews() -> [APImeal] {
-        if let url = Bundle.main.url(forResource: "desserts", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode(APImealList.self, from: data)
-                return jsonData.meals ?? []
-            } catch {
-                print("error:\(error)")
-            }
-        }
-        return []
-    }
-    
-    
+
 }
 
 
