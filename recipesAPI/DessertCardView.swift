@@ -18,7 +18,17 @@ struct DessertCardView: View {
                 content: { image in
                     image.resizable().aspectRatio(contentMode: .fit)
                 },
-                placeholder: { ZStack { Spacer(); ProgressView() } }
+                placeholder: {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
             )
             .cornerRadius(15)
             .shadow(radius: 5)
